@@ -1,8 +1,16 @@
 "use client";
 
 import Image from "next/image";
+import { FaArrowDown, FaMotorcycle, FaWrench, FaShoppingCart } from "react-icons/fa";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
   const featuredBikes = [
     {
       id: 1,
@@ -76,135 +84,208 @@ export default function Home() {
     "/assets/gallery/gallery6.jpg",
   ];
 
-  return (
-    <main className="min-h-screen bg-black text-white flex flex-col items-center font-sans overflow-x-hidden">
-      {/* ======= TOP MENU ======= */}
-      <nav className="flex flex-wrap justify-center bg-[#111] text-[13px] font-semibold w-full max-w-[1200px] border-b border-red-700">
-        {[
-          "HOME",
-          "ABOUT",
-          "MODELS",
-          "MERCHANDISE",
-          "EVENTS",
-          "GALLERY",
-          "CONTACT",
-        ].map((item) => (
-          <a
-            key={item}
-            href={`#${item.toLowerCase()}`}
-            className="px-3 py-2 hover:text-red-500 transition-colors"
-          >
-            {item}
-          </a>
-        ))}
-      </nav>
+  // Services data
+  const services = [
+    {
+      icon: <FaMotorcycle className="text-3xl text-red-500" />,
+      title: "Restoration",
+      description: "Complete vintage bike restoration with authentic parts",
+    },
+    {
+      icon: <FaWrench className="text-3xl text-red-500" />,
+      title: "Maintenance",
+      description: "Expert servicing for classic and modern motorcycles",
+    },
+    {
+      icon: <FaShoppingCart className="text-3xl text-red-500" />,
+      title: "Sales",
+      description: "Rare vintage motorcycles and curated new releases",
+    },
+  ];
 
-      {/* ======= HERO SECTION ======= */}
-      <section className="relative w-full">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/70 z-10" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/60 z-10" />
-        <div
-          className="absolute inset-0 z-20 pointer-events-none"
-          style={{
-            backgroundImage:
-              "url('https://www.transparenttextures.com/patterns/grunge-wall.png')",
-            opacity: 0.15,
-            mixBlendMode: "overlay",
-          }}
-        />
-        <div className="max-w-[1200px] mx-auto">
-          <div className="relative aspect-[16/7] sm:aspect-[16/6] w-full overflow-hidden">
-            <Image
-              src="/assets/images/AsriLuckyStrikeGarage.jpg"
-              alt="Asri Luckystrike Garage"
-              fill
-              className="object-cover object-center"
-              priority
-            />
-            <div className="absolute inset-0 flex flex-col items-center justify-end pb-10 text-center px-4 z-30">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight drop-shadow-lg">
-                Ride the Legend.{" "}
-                <span className="text-red-500">Feel the Past.</span>
-              </h1>
-              <p className="mt-3 text-sm sm:text-base text-gray-200 max-w-2xl">
-                Specialists in rare & vintage Yamaha machines — RD, RZ, YP
-                series (1980s — early 2000s). Restorations, sales, and curated
-                new releases.
-              </p>
-              <div className="mt-6 flex gap-3 flex-wrap justify-center">
-                <a
-                  href="#inventory"
-                  className="inline-block px-4 py-2 rounded border border-red-600 text-red-600 font-semibold hover:bg-red-600 hover:text-black transition"
-                >
-                  View Inventory
-                </a>
-                <a
-                  href="#contact"
-                  className="inline-block px-4 py-2 rounded bg-white/10 text-white border border-transparent hover:bg-white/20 transition"
-                >
-                  Contact Us
-                </a>
-              </div>
+  return (
+    <main className="min-h-screen bg-gradient-to-b from-black to-gray-900 text-white font-montserrat overflow-x-hidden">
+      {/* ======= IMPROVED HERO SECTION ======= */}
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+        {/* Background Image with Overlays */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/assets/images/AsriLuckyStrikeGarage.jpg"
+            alt="Asri Luckystrike Garage"
+            fill
+            className="object-cover object-center"
+            priority
+            quality={100}
+          />
+          {/* Gradient Overlays */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/80" />
+          
+          {/* Animated Grid Pattern */}
+          <div 
+            className="absolute inset-0 opacity-20"
+            style={{
+              backgroundImage: `
+                linear-gradient(90deg, transparent 95%, rgba(220, 38, 38, 0.1) 100%),
+                linear-gradient(0deg, transparent 95%, rgba(220, 38, 38, 0.1) 100%)
+              `,
+              backgroundSize: '50px 50px',
+            }}
+          />
+        </div>
+
+        {/* Hero Content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            {/* Main Heading */}
+            <h1 className="font-oswald text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-6">
+              <span className="block text-white drop-shadow-2xl">RIDE THE</span>
+              <span className="block text-red-500 drop-shadow-2xl">LEGEND</span>
+            </h1>
+
+            {/* Subheading */}
+            <p className="text-xl sm:text-2xl text-gray-300 max-w-3xl mx-auto mb-8 leading-relaxed font-light">
+              Specialists in rare & vintage Yamaha machines — RD, RZ, YP series 
+              <span className="block text-red-400 font-medium">Restorations • Sales • Heritage Preservation</span>
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+              <a
+                href="#inventory"
+                className="group relative px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl hover:shadow-red-500/30"
+              >
+                <span className="relative z-10">EXPLORE COLLECTION</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-700 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </a>
+              <a
+                href="#contact"
+                className="group px-8 py-4 bg-transparent border-2 border-white/30 hover:border-red-500 text-white font-semibold rounded-lg transition-all duration-300 hover:bg-white/5"
+              >
+                <span className="relative z-10">BOOK APPOINTMENT</span>
+              </a>
+            </div>
+
+            {/* Scroll Indicator - Moved down to prevent overlap */}
+            <div className="animate-bounce mt-12 mb-24 md:mb-32">
+              <FaArrowDown className="mx-auto text-gray-400 text-xl" />
+              <p className="text-sm text-gray-500 mt-2">Scroll to explore</p>
             </div>
           </div>
         </div>
       </section>
 
+      {/* ======= STATS BAR - Now separate from hero section ======= */}
+      <div className="relative z-20 -mt-16 md:-mt-24 mb-16 md:mb-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            {services.map((service, index) => (
+              <div 
+                key={index}
+                className={`text-center transform transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+                style={{ transitionDelay: `${index * 200}ms` }}
+              >
+                <div className="inline-block p-6 bg-black/80 backdrop-blur-sm rounded-2xl border border-red-500/20 mb-4 shadow-2xl shadow-black/50 hover:shadow-red-500/20 transition-all duration-300">
+                  {service.icon}
+                </div>
+                <h3 className="font-oswald text-xl md:text-2xl font-semibold mb-2 text-white">{service.title}</h3>
+                <p className="text-gray-300 text-sm md:text-base max-w-xs mx-auto">{service.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* ======= FEATURED SECTION ======= */}
-      <section id="inventory" className="max-w-[1200px] w-full px-4 mt-10 mb-10 text-center">
-        <h2 className="text-2xl font-bold mb-6">
-          Featured{" "}
-          <span className="text-red-500 border-b-2 border-red-500">
-            Motorcycles
-          </span>
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {featuredBikes.map((b) => (
-            <article
-              key={b.id}
-              className="border border-[#222] bg-[#0d0d0d] rounded-lg overflow-hidden shadow-lg hover:shadow-red-700/30 transition-shadow"
+      <section id="inventory" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
+        <div className="text-center mb-12">
+          <h2 className="font-oswald text-4xl font-bold mb-4">
+            FEATURED{" "}
+            <span className="text-red-500">MOTORCYCLES</span>
+          </h2>
+          <p className="text-gray-400 max-w-2xl mx-auto">
+            Discover our curated collection of rare vintage machines and modern classics
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {featuredBikes.map((bike) => (
+            <div
+              key={bike.id}
+              className="group relative overflow-hidden rounded-xl border border-gray-800 bg-gradient-to-b from-gray-900 to-black hover:border-red-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-red-500/10"
             >
-              <div className="relative h-44 sm:h-40 md:h-44 overflow-hidden">
+              {/* Image Container */}
+              <div className="relative h-64 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-10" />
                 <Image
-                  src={b.image}
-                  alt={b.name}
+                  src={bike.image}
+                  alt={bike.name}
                   fill
-                  className="object-cover object-center transition-transform duration-300 hover:scale-105"
+                  className="object-cover group-hover:scale-110 transition-transform duration-700"
                 />
+                {/* Tag */}
+                <div className="absolute top-4 left-4 z-20">
+                  <span className="px-3 py-1 bg-red-500 text-xs font-semibold rounded-full">
+                    {bike.tag}
+                  </span>
+                </div>
               </div>
-              <div className="p-4 text-left">
-                <h3 className="text-lg font-semibold">{b.name}</h3>
-                <p className="text-sm text-red-400">{b.tag}</p>
-                <p className="text-sm text-gray-400 mt-1">{b.short}</p>
+              
+              {/* Content */}
+              <div className="p-6">
+                <h3 className="font-oswald text-xl font-semibold mb-2">{bike.name}</h3>
+                <p className="text-gray-400 text-sm mb-4">{bike.short}</p>
+                <button className="w-full py-2 text-sm font-semibold text-red-500 border border-red-500/30 rounded-lg hover:bg-red-500 hover:text-white transition-colors duration-300">
+                  View Details
+                </button>
               </div>
-            </article>
+            </div>
           ))}
         </div>
       </section>
 
       {/* ======= EVENTS SECTION ======= */}
-      <section id="events" className="max-w-[1200px] w-full px-4 mt-10 mb-10">
-        <h2 className="text-2xl font-bold text-center mb-6">
-          Latest <span className="text-red-500 border-b-2 border-red-500">Events</span>
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {events.map((e, i) => (
+      <section id="events" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
+        <div className="text-center mb-12">
+          <h2 className="font-oswald text-4xl font-bold mb-4">
+            UPCOMING <span className="text-red-500">EVENTS</span>
+          </h2>
+          <p className="text-gray-400 max-w-2xl mx-auto">
+            Join our community events and workshops for vintage motorcycle enthusiasts
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {events.map((event, index) => (
             <div
-              key={i}
-              className="flex flex-col md:flex-row bg-[#0d0d0d] border border-[#222] rounded-lg overflow-hidden hover:shadow-red-700/30 transition"
+              key={index}
+              className="group relative overflow-hidden rounded-xl border border-gray-800 bg-gradient-to-br from-gray-900 to-black hover:border-red-500/50 transition-all duration-300"
             >
-              <div className="relative w-full md:w-1/2 h-52">
-                <Image
-                  src={e.image}
-                  alt={e.title}
-                  fill
-                  className="object-cover object-center"
-                />
-              </div>
-              <div className="p-4 flex flex-col justify-center">
-                <h3 className="text-lg font-semibold">{e.title}</h3>
-                <p className="text-sm text-red-400">{e.date}</p>
-                <p className="text-sm text-gray-400 mt-2">{e.desc}</p>
+              <div className="flex flex-col lg:flex-row">
+                {/* Image */}
+                <div className="relative lg:w-2/5 h-64 lg:h-auto">
+                  <Image
+                    src={event.image}
+                    alt={event.title}
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent lg:bg-gradient-to-b" />
+                </div>
+                
+                {/* Content */}
+                <div className="lg:w-3/5 p-8">
+                  <div className="flex items-center mb-4">
+                    <div className="px-3 py-1 bg-red-500/10 border border-red-500/30 rounded-lg">
+                      <span className="text-red-400 text-sm font-semibold">{event.date}</span>
+                    </div>
+                  </div>
+                  <h3 className="font-oswald text-2xl font-semibold mb-3">{event.title}</h3>
+                  <p className="text-gray-400 mb-6">{event.desc}</p>
+                  <button className="px-6 py-2 text-sm font-semibold text-red-500 border border-red-500/30 rounded-lg hover:bg-red-500 hover:text-white transition-colors duration-300">
+                    Learn More
+                  </button>
+                </div>
               </div>
             </div>
           ))}
@@ -212,30 +293,42 @@ export default function Home() {
       </section>
 
       {/* ======= MERCHANDISE SECTION ======= */}
-      <section id="merchandise" className="max-w-[1200px] w-full px-4 mt-10 mb-10 text-center">
-        <h2 className="text-2xl font-bold mb-6">
-          Official{" "}
-          <span className="text-red-500 border-b-2 border-red-500">
-            Merchandise
-          </span>
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {merch.map((m, i) => (
+      <section id="merchandise" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
+        <div className="text-center mb-12">
+          <h2 className="font-oswald text-4xl font-bold mb-4">
+            OFFICIAL <span className="text-red-500">MERCHANDISE</span>
+          </h2>
+          <p className="text-gray-400 max-w-2xl mx-auto">
+            Wear the legacy with our exclusive vintage motorcycle apparel and accessories
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {merch.map((item, index) => (
             <div
-              key={i}
-              className="border border-[#222] bg-[#0d0d0d] rounded-lg overflow-hidden shadow hover:shadow-red-700/30 transition"
+              key={index}
+              className="group relative overflow-hidden rounded-xl border border-gray-800 bg-gradient-to-b from-gray-900 to-black hover:border-red-500/50 transition-all duration-300"
             >
-              <div className="relative h-48 overflow-hidden">
+              {/* Image */}
+              <div className="relative h-72 overflow-hidden">
                 <Image
-                  src={m.image}
-                  alt={m.name}
+                  src={item.image}
+                  alt={item.name}
                   fill
-                  className="object-cover object-center transition-transform duration-300 hover:scale-105"
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
               </div>
-              <div className="p-4">
-                <h3 className="text-lg font-semibold">{m.name}</h3>
-                <p className="text-red-400">{m.price}</p>
+              
+              {/* Content */}
+              <div className="p-6">
+                <h3 className="font-oswald text-xl font-semibold mb-2">{item.name}</h3>
+                <div className="flex items-center justify-between">
+                  <span className="text-2xl font-bold text-red-500">{item.price}</span>
+                  <button className="px-4 py-2 text-sm font-semibold bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors duration-300">
+                    Add to Cart
+                  </button>
+                </div>
               </div>
             </div>
           ))}
@@ -243,78 +336,61 @@ export default function Home() {
       </section>
 
       {/* ======= GALLERY SECTION ======= */}
-      <section id="gallery" className="max-w-[1200px] w-full px-4 mt-10 mb-10 text-center">
-        <h2 className="text-2xl font-bold mb-6">
-          <span className="text-red-500 border-b-2 border-red-500">Gallery</span>
-        </h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-          {gallery.map((src, i) => (
-            <div key={i} className="relative w-full h-36 sm:h-44 md:h-52 overflow-hidden rounded">
+      <section id="gallery" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
+        <div className="text-center mb-12">
+          <h2 className="font-oswald text-4xl font-bold mb-4">
+            <span className="text-red-500">GALLERY</span>
+          </h2>
+          <p className="text-gray-400 max-w-2xl mx-auto">
+            A glimpse into our world of vintage motorcycle restoration and community events
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {gallery.map((src, index) => (
+            <div
+              key={index}
+              className="group relative aspect-square overflow-hidden border border-gray-800 hover:border-red-500/50 transition-all duration-300"
+            >
               <Image
                 src={src}
-                alt={`Gallery ${i + 1}`}
+                alt={`Gallery ${index + 1}`}
                 fill
-                className="object-cover object-center hover:scale-105 transition-transform"
+                className="object-cover group-hover:scale-110 transition-transform duration-700"
               />
+              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <span className="text-white text-sm font-semibold">View</span>
+              </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* ======= FOOTER ======= */}
-      <footer className="w-full bg-[#0a0a0a] border-t border-[#222] text-gray-400 text-sm mt-10">
-        <div className="max-w-[1200px] mx-auto px-4 py-8 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center sm:text-left">
-          {/* Column 1 */}
-          <div>
-            <h3 className="text-red-500 font-semibold mb-3">Quick Links</h3>
-            <ul className="space-y-2">
-              {["Home", "Models", "Merchandise", "Events", "Gallery"].map((link) => (
-                <li key={link}>
-                  <a href={`#${link.toLowerCase()}`} className="hover:text-red-400">
-                    {link}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Column 2 */}
-          <div>
-            <h3 className="text-red-500 font-semibold mb-3">Contact</h3>
-            <p>📍 Selangor, Malaysia</p>
-            <p>📞 +60 12-345 6789</p>
-            <p>
-              ✉️{" "}
-              <a
-                href="mailto:asriluckystrikegarage@gmail.com"
-                className="hover:text-red-400"
-              >
-                asriluckystrikegarage@gmail.com
-              </a>
-            </p>
-          </div>
-
-          {/* Column 3 */}
-          <div>
-            <h3 className="text-red-500 font-semibold mb-3">Follow Us</h3>
-            <div className="flex justify-center sm:justify-start gap-4">
-              <a href="#" className="hover:text-red-400">
-                Facebook
-              </a>
-              <a href="#" className="hover:text-red-400">
-                Instagram
-              </a>
-              <a href="#" className="hover:text-red-400">
-                YouTube
-              </a>
-            </div>
+      {/* ======= CONTACT CTA SECTION ======= */}
+      <section id="contact" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
+        <div className="bg-gradient-to-r from-gray-900 to-black border border-gray-800 rounded-2xl p-8 md:p-12 text-center">
+          <h2 className="font-oswald text-3xl md:text-4xl font-bold mb-4">
+            Ready to Own a Piece of History?
+          </h2>
+          <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
+            Contact us today to schedule a viewing or discuss your restoration project
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="tel:+60123456789"
+              className="px-8 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors duration-300"
+            >
+              Call Now
+            </a>
+            <a
+              href="mailto:asriluckystrikegarage@gmail.com"
+              className="px-8 py-3 bg-transparent border-2 border-white/30 hover:border-red-500 text-white font-semibold rounded-lg transition-colors duration-300"
+            >
+              Email Us
+            </a>
           </div>
         </div>
-
-        <div className="border-t border-[#111] py-4 text-center text-gray-500 text-xs">
-          © {new Date().getFullYear()} Asri Luckystrike Garage. All Rights Reserved.
-        </div>
-      </footer>
+      </section>
     </main>
   );
 }
