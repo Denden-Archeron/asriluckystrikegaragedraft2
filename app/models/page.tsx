@@ -181,12 +181,11 @@ export default function ModelsPage() {
                       href={`/models/${bike.id}`}
                       className="p-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors inline-flex"
                     >
-                      <FaInfoCircle className="text-white" />
+                      <button className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors">
+                        <FaInfoCircle />
+                        <span className="hidden sm:inline">Details</span>
+                      </button>
                     </Link>
-                    <button className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors">
-                      <FaShoppingCart />
-                      <span className="hidden sm:inline">Inquire</span>
-                    </button>
                   </div>
                 </div>
               </div>

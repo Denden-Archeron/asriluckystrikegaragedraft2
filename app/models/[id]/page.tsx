@@ -104,12 +104,12 @@ export default function MotorcycleDetailPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8">
             {/* Image Gallery */}
             <div>
-              <div className="relative h-96 rounded-xl overflow-hidden mb-4">
+              <div className="relative w-full aspect-square md:aspect-video rounded-xl overflow-hidden mb-4">
                 <Image
                   src={galleryImages[selectedImage]}
                   alt={bike.name}
                   fill
-                  className="object-cover"
+                  className="object-contain bg-black"
                   priority
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
@@ -129,12 +129,12 @@ export default function MotorcycleDetailPage() {
               </div>
               
               {/* Thumbnail Gallery */}
-              <div className="flex gap-2">
+              <div className="flex gap-2 overflow-x-auto pb-2">
                 {galleryImages.map((img: string, index: number) => (
                   <button
                     key={index}
                     onClick={() => setSelectedImage(index)}
-                    className={`relative h-20 flex-1 rounded-lg overflow-hidden border-2 transition-all ${
+                    className={`relative h-20 md:h-24 w-20 md:w-24 flex-shrink-0 rounded-lg overflow-hidden border-2 transition-all ${
                       selectedImage === index ? 'border-red-500' : 'border-gray-700 hover:border-gray-500'
                     }`}
                   >
@@ -142,8 +142,8 @@ export default function MotorcycleDetailPage() {
                       src={img}
                       alt={`${bike.name} view ${index + 1}`}
                       fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 25vw, 12.5vw"
+                      className="object-contain bg-black"
+                      sizes="(max-width: 768px) 80px, 96px"
                     />
                   </button>
                 ))}
@@ -202,11 +202,15 @@ export default function MotorcycleDetailPage() {
 
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-4">
-                <button className="flex-1 px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg transition-colors duration-300 flex items-center justify-center gap-2">
+                <button 
+                  onClick={() => window.open('https://wa.me/60126736445?text=Hi%20I%20am%20interested%20in%20this%20motorcycle%20-%20' + encodeURIComponent(bike.name), '_blank')}
+                  className="flex-1 px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg transition-colors duration-300 flex items-center justify-center gap-2">
                   <FaWhatsapp className="text-xl" />
                   WhatsApp Inquiry
                 </button>
-                <button className="flex-1 px-8 py-4 bg-gray-800 hover:bg-gray-700 text-white font-bold rounded-lg transition-colors duration-300 flex items-center justify-center gap-2">
+                <button 
+                  onClick={() => window.open('tel:+60126736445')}
+                  className="flex-1 px-8 py-4 bg-gray-800 hover:bg-gray-700 text-white font-bold rounded-lg transition-colors duration-300 flex items-center justify-center gap-2">
                   <FaPhone />
                   Call Now
                 </button>

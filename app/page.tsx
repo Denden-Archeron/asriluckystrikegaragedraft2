@@ -3,6 +3,9 @@
 import Image from "next/image";
 import { FaArrowDown, FaMotorcycle, FaWrench, FaShoppingCart } from "react-icons/fa";
 import { useEffect, useState } from "react";
+import { motorcycles } from "@/app/data/motorcycles";
+import { attendedEvents } from "@/app/data/events";
+import Link from "next/link";
 
 export default function Home() {
   const [isVisible, setIsVisible] = useState(false);
@@ -11,77 +14,46 @@ export default function Home() {
     setIsVisible(true);
   }, []);
 
-  const featuredBikes = [
-    {
-      id: 1,
-      name: "Yamaha RD350LC",
-      tag: "Vintage (1980s)",
-      short: "Classic two-stroke legend. Restored & tuned.",
-      image: "/assets/bike/rd350lc.jpeg",
-    },
-    {
-      id: 2,
-      name: "Yamaha RZ250",
-      tag: "Vintage (1986)",
-      short: "Rare YPVS model — collector's favourite.",
-      image: "/assets/bike/rz250.jpeg",
-    },
-    {
-      id: 3,
-      name: "Honda Compo",
-      tag: "Vintage (1990s)",
-      short: "Compact folding scooter — urban classic.",
-      image: "/assets/bike/honda-compo.jpg",
-    },
-    {
-      id: 4,
-      name: "Yamaha R25",
-      tag: "New",
-      short: "Modern performance — available new.",
-      image: "/assets/bike/r25.jpg",
-    },
-  ];
+  // Get top 4 bikes from motorcycles data
+  const featuredBikes = motorcycles.slice(0, 12).map((bike) => ({
+    id: bike.id,
+    name: bike.name,
+    tag: bike.year,
+    short: bike.description,
+    image: bike.image,
+  }));
 
-  const events = [
-    {
-      title: "Vintage Bike Gathering 2025",
-      date: "March 15, 2025",
-      desc: "Join our annual vintage motorcycle meetup in Penang — celebrating RD, RZ & YP series history.",
-      image: "/assets/gallery/event1.jpg",
-    },
-    {
-      title: "Restoration Workshop",
-      date: "April 10, 2025",
-      desc: "Hands-on session on carb tuning, repainting, and restoring old Yamaha classics.",
-      image: "/assets/gallery/event2.jpg",
-    },
-  ];
+  // Get recent events from attended events
+  const events = attendedEvents.filter(event => event.type === 'recent').slice(0, 2).map(event => ({
+    title: event.title,
+    date: event.date,
+    desc: event.description,
+    image: event.image,
+    id: event.id,
+  }));
 
   const merch = [
     {
+      id: 1,
       name: "Asri Luckystrike T-Shirt",
-      price: "RM79",
-      image: "/assets/merchandise/merch1.jpg",
-    },
-    {
-      name: "Keychain Collection",
-      price: "RM25",
-      image: "/assets/merchandise/merch2.jpg",
-    },
-    {
-      name: "Retro Sticker Pack",
-      price: "RM19",
-      image: "/assets/merchandise/merch3.jpg",
+      price: "RM80",
+      originalPrice: "RM99",
+      image: "/assets/merchandise/MerchShirtFront.jpeg",
+      rating: 4.8,
+      stock: 25,
+      badge: "SALE",
     },
   ];
 
   const gallery = [
-    "/assets/gallery/gallery1.jpg",
-    "/assets/gallery/gallery2.jpg",
-    "/assets/gallery/gallery3.jpg",
-    "/assets/gallery/gallery4.jpg",
-    "/assets/gallery/gallery5.jpg",
-    "/assets/gallery/gallery6.jpg",
+    "/assets/events/RD Durian Weekend/RD Durian Weekend1.jpeg",
+    "/assets/events/RD Durian Weekend/RD Durian Weekend2.jpeg",
+    "/assets/events/RD Durian Weekend/RD Durian Weekend3.jpeg",
+    "/assets/events/RD Durian Weekend/RD Durian Weekend4.jpeg",
+    "/assets/events/RD Durian Weekend/RD Durian Weekend5.jpeg",
+    "/assets/events/RD Durian Weekend/RD Durian Weekend6.jpeg",
+    "/assets/events/RD Durian Weekend/RD Durian Weekend7.jpeg",
+    "/assets/events/RD Durian Weekend/RD Durian Weekend8.jpeg",
   ];
 
   // Services data
@@ -235,9 +207,11 @@ export default function Home() {
               <div className="p-6">
                 <h3 className="font-oswald text-xl font-semibold mb-2">{bike.name}</h3>
                 <p className="text-gray-400 text-sm mb-4">{bike.short}</p>
-                <button className="w-full py-2 text-sm font-semibold text-red-500 border border-red-500/30 rounded-lg hover:bg-red-500 hover:text-white transition-colors duration-300">
-                  View Details
-                </button>
+                <a href="/models">
+                  <button className="w-full py-2 text-sm font-semibold text-red-500 border border-red-500/30 rounded-lg hover:bg-red-500 hover:text-white transition-colors duration-300">
+                    View Details
+                  </button>
+                </a>
               </div>
             </div>
           ))}
@@ -248,7 +222,7 @@ export default function Home() {
       <section id="events" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
         <div className="text-center mb-12">
           <h2 className="font-oswald text-4xl font-bold mb-4">
-            UPCOMING <span className="text-red-500">EVENTS</span>
+            PAST <span className="text-red-500">EVENTS</span>
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
             Join our community events and workshops for vintage motorcycle enthusiasts
@@ -282,9 +256,11 @@ export default function Home() {
                   </div>
                   <h3 className="font-oswald text-2xl font-semibold mb-3">{event.title}</h3>
                   <p className="text-gray-400 mb-6">{event.desc}</p>
-                  <button className="px-6 py-2 text-sm font-semibold text-red-500 border border-red-500/30 rounded-lg hover:bg-red-500 hover:text-white transition-colors duration-300">
-                    Learn More
-                  </button>
+                  <Link href="/events">
+                    <button className="px-6 py-2 text-sm font-semibold text-red-500 border border-red-500/30 rounded-lg hover:bg-red-500 hover:text-white transition-colors duration-300">
+                      Learn More
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -303,35 +279,91 @@ export default function Home() {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {merch.map((item, index) => (
-            <div
-              key={index}
-              className="group relative overflow-hidden rounded-xl border border-gray-800 bg-gradient-to-b from-gray-900 to-black hover:border-red-500/50 transition-all duration-300"
-            >
-              {/* Image */}
-              <div className="relative h-72 overflow-hidden">
-                <Image
-                  src={item.image}
-                  alt={item.name}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-              </div>
-              
-              {/* Content */}
-              <div className="p-6">
-                <h3 className="font-oswald text-xl font-semibold mb-2">{item.name}</h3>
-                <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold text-red-500">{item.price}</span>
-                  <button className="px-4 py-2 text-sm font-semibold bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors duration-300">
-                    Add to Cart
+            <Link key={index} href={`/merchandise/${item.id}`}>
+              <div className="group relative overflow-hidden rounded-xl border border-gray-800 bg-gradient-to-b from-gray-900 to-black hover:border-red-500/50 transition-all duration-300 cursor-pointer h-full">
+                {/* Image */}
+                <div className="relative h-72 overflow-hidden">
+                  <Image
+                    src={item.image}
+                    alt={item.name}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+                  
+                  {/* Badges */}
+                  <div className="absolute top-4 left-4 flex flex-col gap-2">
+                    {item.badge && (
+                      <span className="px-3 py-1 bg-green-500 text-white text-xs font-bold rounded-full">
+                        {item.badge}
+                      </span>
+                    )}
+                  </div>
+                  
+                  {/* Stock Status */}
+                  <div className="absolute bottom-4 right-4">
+                    <span className="px-3 py-1 bg-black/70 text-white text-xs font-bold rounded-full">
+                      {item.stock} left
+                    </span>
+                  </div>
+                </div>
+                
+                {/* Content */}
+                <div className="p-6">
+                  <h3 className="font-oswald text-xl font-semibold mb-3 group-hover:text-red-500 transition-colors">
+                    {item.name}
+                  </h3>
+                  
+                  {/* Rating */}
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="flex gap-1">
+                      {[...Array(5)].map((_, i) => (
+                        <span
+                          key={i}
+                          className={`text-sm ${
+                            i < Math.floor(item.rating)
+                              ? "text-yellow-500"
+                              : "text-gray-600"
+                          }`}
+                        >
+                          ★
+                        </span>
+                      ))}
+                    </div>
+                    <span className="text-sm text-gray-400">({item.rating})</span>
+                  </div>
+                  
+                  {/* Price */}
+                  <div className="flex items-center gap-3">
+                    <span className="text-2xl font-bold text-red-500">{item.price}</span>
+                    {item.originalPrice && (
+                      <span className="text-sm text-gray-500 line-through">
+                        {item.originalPrice}
+                      </span>
+                    )}
+                  </div>
+                  
+                  {/* View Details Button */}
+                  <button className="w-full mt-4 px-4 py-2 text-sm font-semibold bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors duration-300">
+                    View Details
                   </button>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
+        </div>
+
+        {/* View All Button */}
+        <div className="flex justify-center">
+          <Link
+            href="/merchandise"
+            className="px-8 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors duration-300 inline-flex items-center gap-2"
+          >
+            View All Merchandise
+            <span className="text-xl">→</span>
+          </Link>
         </div>
       </section>
 
@@ -363,6 +395,17 @@ export default function Home() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* View All Gallery Button */}
+        <div className="flex justify-center mt-12">
+          <Link
+            href="/gallery"
+            className="px-8 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors duration-300 inline-flex items-center gap-2"
+          >
+            View All Gallery
+            <span className="text-xl">→</span>
+          </Link>
         </div>
       </section>
 

@@ -15,6 +15,7 @@ import {
 import { useState } from "react";
 import { attendedEvents } from "@/app/data/events";
 import type { EventType } from "@/app/data/eventTypes";
+import Link from "next/link";
 
 export default function EventsPage() {
   const [activeTab, setActiveTab] = useState<"all" | "recent" | "past">("recent");
@@ -151,7 +152,7 @@ export default function EventsPage() {
                             className="flex items-center gap-2 text-sm text-gray-400 hover:text-red-500 transition-colors"
                           >
                             <FaExternalLinkAlt />
-                            Event Website
+                            Official Event Website
                           </a>
                         )}
                       </div>
@@ -160,9 +161,11 @@ export default function EventsPage() {
                           <FaShareAlt />
                           Share
                         </button>
-                        <button className="px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg transition-colors">
-                          View Gallery
-                        </button>
+                        <Link href="/gallery">
+                          <button className="px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg transition-colors">
+                            View Gallery
+                          </button>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -302,7 +305,7 @@ export default function EventsPage() {
       </section>
 
       {/* ======= YEARLY HIGHLIGHTS ======= */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      {/*<section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="bg-gradient-to-b from-gray-900 to-black border border-gray-800 rounded-2xl p-8">
           <h2 className="font-oswald text-3xl md:text-4xl font-bold mb-8 text-center">
             YEARLY <span className="text-red-500">HIGHLIGHTS</span>
@@ -338,7 +341,7 @@ export default function EventsPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section>*/}
     </main>
   );
 }

@@ -5,17 +5,17 @@ import { FaMotorcycle, FaHistory, FaUsers, FaAward } from "react-icons/fa";
 
 export default function AboutPage() {
   const milestones = [
-    { year: "1990", title: "Garage Founded", description: "Started as a small motorcycle repair shop in Selangor" },
-    { year: "1995", title: "First Restoration", description: "Completed full restoration of Yamaha RD350LC" },
-    { year: "2005", title: "Specialization", description: "Became specialists in Yamaha vintage models" },
-    { year: "2015", title: "Expansion", description: "Opened showroom and merchandise line" },
-    { year: "2023", title: "Community Hub", description: "Became gathering spot for vintage bike enthusiasts" },
+    { year: "2014", title: "Garage Founded", description: "Started as a small motorcycle repair shop in Selangor" },
+    { year: "2015", title: "First Restoration", description: "Completed full restoration of Yamaha RD350LC" },
+    { year: "2016", title: "Specialization", description: "Became specialists in Yamaha vintage models" },
+    { year: "2018", title: "Expansion", description: "Opened showroom and merchandise line" },
+    { year: "2020", title: "Community Hub", description: "Became gathering spot for vintage bike enthusiasts" },
   ];
 
   const team = [
-    { name: "Asri", role: "Founder & Master Mechanic", image: "/assets/team/asri.jpg", experience: "30+ years" },
-    { name: "Hassan", role: "Restoration Specialist", image: "/assets/team/hassan.jpg", experience: "15+ years" },
-    { name: "Lisa", role: "Parts & Merchandise", image: "/assets/team/lisa.jpg", experience: "8+ years" },
+    { name: "Asri", role: "Founder & Master Mechanic", image: "/assets/team/Founder-Asri.jpg", experience: "12+ years" },
+    { name: "Hassan", role: "Restoration Specialist", image: "/assets/team/hassan.jpg", experience: "10+ years" },
+    { name: "Ramli", role: "Parts & Merchandise", image: "/assets/team/lisa.jpg", experience: "8+ years" },
     { name: "Razif", role: "Sales & Customer Relations", image: "/assets/team/razif.jpg", experience: "10+ years" },
   ];
 
@@ -79,7 +79,7 @@ export default function AboutPage() {
           {/* Image */}
           <div className="relative h-96 rounded-xl overflow-hidden border-2 border-red-500/30">
             <Image
-              src="/assets/images/garage-interior.jpg"
+              src="/assets/images/Asriluckystrikegaragebranding.jpeg"
               alt="Garage Interior"
               fill
               className="object-cover"
@@ -230,8 +230,10 @@ export default function AboutPage() {
             >
               Contact Us
             </a>
-            <a
-              href="#"
+            <a 
+              href="https://www.google.com/maps/search/ASRI+LUCKYSTRIKE+GARAGE,LOT+6015-A3+JALAN+IPOH+BATU+7+1,+4,+Jalan+Selayang+Baru,+68100+Batu+Caves,+Selangor"
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-8 py-3 bg-transparent border-2 border-white/30 hover:border-red-500 text-white font-semibold rounded-lg transition-colors duration-300"
             >
               Get Directions

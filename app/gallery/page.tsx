@@ -1,12 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { FaCamera, FaSearch, FaDownload, FaShare, FaHeart } from "react-icons/fa";
+import { FaCamera, FaSearch, FaDownload, FaShare, FaHeart, FaYoutube, FaExternalLinkAlt, FaPlay } from "react-icons/fa";
 import { useState } from "react";
 
 export default function GalleryPage() {
   const [activeCategory, setActiveCategory] = useState("all");
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
   const categories = [
     { id: "all", name: "All Photos" },
@@ -18,43 +20,62 @@ export default function GalleryPage() {
   ];
 
   const galleryImages = [
+    // RD Durian Weekend 2026
+    { id: 1, src: "/assets/events/RD Durian Weekend/RD Durian Weekend1.jpeg", category: "events", title: "RD Durian Weekend 2026", featured: true },
+    { id: 2, src: "/assets/events/RD Durian Weekend/RD Durian Weekend2.jpeg", category: "events", title: "RD Durian Weekend - Gathering" },
+    { id: 3, src: "/assets/events/RD Durian Weekend/RD Durian Weekend3.jpeg", category: "events", title: "RD Durian Weekend - Bikes" },
+    { id: 4, src: "/assets/events/RD Durian Weekend/RD Durian Weekend4.jpeg", category: "events", title: "RD Durian Weekend - Display" },
+    { id: 5, src: "/assets/events/RD Durian Weekend/RD Durian Weekend5.jpeg", category: "events", title: "RD Durian Weekend - Participants" },
+    { id: 6, src: "/assets/events/RD Durian Weekend/RD Durian Weekend6.jpeg", category: "events", title: "RD Durian Weekend - Community" },
+    { id: 7, src: "/assets/events/RD Durian Weekend/RD Durian Weekend7.jpeg", category: "events", title: "RD Durian Weekend - Moment" },
+    { id: 8, src: "/assets/events/RD Durian Weekend/RD Durian Weekend8.jpeg", category: "events", title: "RD Durian Weekend - Ride" },
+    { id: 9, src: "/assets/events/RD Durian Weekend/RD Durian Weekend9.jpeg", category: "events", title: "RD Durian Weekend - Heritage" },
+    { id: 10, src: "/assets/events/RD Durian Weekend/RD Durian Weekend10.jpeg", category: "events", title: "RD Durian Weekend - Show" },
+    { id: 11, src: "/assets/events/RD Durian Weekend/RD Durian Weekend11.jpeg", category: "events", title: "RD Durian Weekend - Collection" },
+    { id: 12, src: "/assets/events/RD Durian Weekend/RD Durian Weekend12.jpeg", category: "events", title: "RD Durian Weekend - Action" },
+    { id: 13, src: "/assets/events/RD Durian Weekend/RD Durian Weekend13.jpeg", category: "events", title: "RD Durian Weekend - Details" },
+    { id: 14, src: "/assets/events/RD Durian Weekend/RD Durian Weekend14.jpeg", category: "events", title: "RD Durian Weekend - Showcase" },
+    { id: 15, src: "/assets/events/RD Durian Weekend/RD Durian Weekend15.jpeg", category: "events", title: "RD Durian Weekend - Festival" },
+    { id: 16, src: "/assets/events/RD Durian Weekend/RD Durian Weekend16.jpeg", category: "events", title: "RD Durian Weekend - Experience" },
+    { id: 17, src: "/assets/events/RD Durian Weekend/RD Durian Weekend17.jpeg", category: "events", title: "RD Durian Weekend - Memories" },
+    
     // Restoration Projects
-    { id: 1, src: "/assets/gallery/restore1.jpg", category: "restoration", title: "RD350LC Restoration", featured: true },
-    { id: 2, src: "/assets/gallery/restore2.jpg", category: "restoration", title: "Engine Rebuild" },
-    { id: 3, src: "/assets/gallery/restore3.jpg", category: "restoration", title: "Frame Painting" },
-    { id: 4, src: "/assets/gallery/restore4.jpg", category: "restoration", title: "Final Assembly" },
+    { id: 18, src: "/assets/bike/TZR 125.png", category: "restoration", title: "RD350LC Restoration", featured: false },
+    { id: 19, src: "/assets/bike/TDR 250.png", category: "restoration", title: "Engine Rebuild" },
+    { id: 20, src: "/assets/bike/RZ 250 RR.png", category: "restoration", title: "Frame Painting" },
+    { id: 21, src: "/assets/bike/RZ 250 R.png", category: "restoration", title: "Final Assembly" },
     
     // Events
-    { id: 5, src: "/assets/gallery/event1.jpg", category: "events", title: "2024 Gathering", featured: true },
-    { id: 6, src: "/assets/gallery/event2.jpg", category: "events", title: "Workshop Session" },
-    { id: 7, src: "/assets/gallery/event3.jpg", category: "events", title: "Charity Ride" },
-    { id: 8, src: "/assets/gallery/event4.jpg", category: "events", title: "Awards Ceremony" },
+    { id: 22, src: "/assets/gallery/event1.jpg", category: "events", title: "2024 Gathering" },
+    { id: 23, src: "/assets/gallery/event2.jpg", category: "events", title: "Workshop Session" },
+    { id: 24, src: "/assets/gallery/event3.jpg", category: "events", title: "Charity Ride" },
+    { id: 25, src: "/assets/gallery/event4.jpg", category: "events", title: "Awards Ceremony" },
     
     // Motorcycles
-    { id: 9, src: "/assets/bike/rd350lc.jpeg", category: "bikes", title: "Yamaha RD350LC", featured: true },
-    { id: 10, src: "/assets/bike/rz250.jpeg", category: "bikes", title: "Yamaha RZ250" },
-    { id: 11, src: "/assets/bike/r25.jpg", category: "bikes", title: "Yamaha R25" },
-    { id: 12, src: "/assets/bike/honda-compo.jpg", category: "bikes", title: "Honda Compo" },
+    { id: 26, src: "/assets/bike/AprilliaRS250GP1.png", category: "bikes", title: "Aprillia RS250 GP1", featured: true },
+    { id: 27, src: "/assets/bike/RD250LC.png", category: "bikes", title: "Yamaha RD350LC" },
+    { id: 28, src: "/assets/bike/RZ250.png", category: "bikes", title: "Yamaha RZ250" },
+    { id: 29, src: "/assets/bike/RZV500.png", category: "bikes", title: "Yamaha RZV500" },
     
     // Workshop
-    { id: 13, src: "/assets/gallery/workshop1.jpg", category: "workshop", title: "Workshop Interior" },
-    { id: 14, src: "/assets/gallery/workshop2.jpg", category: "workshop", title: "Tool Collection" },
-    { id: 15, src: "/assets/gallery/workshop3.jpg", category: "workshop", title: "Parts Storage" },
-    { id: 16, src: "/assets/gallery/workshop4.jpg", category: "workshop", title: "Work in Progress" },
+    { id: 30, src: "/assets/gallery/event5.jpg", category: "workshop", title: "Workshop Interior" },
+    { id: 31, src: "/assets/gallery/event6.jpg", category: "workshop", title: "Tool Collection" },
+    { id: 32, src: "/assets/bike/Honda MBX 125.png", category: "workshop", title: "Parts Storage" },
+    { id: 33, src: "/assets/gallery/Riding.jpg", category: "workshop", title: "Work in Progress" },
     
     // Vintage Collection
-    { id: 17, src: "/assets/gallery/vintage1.jpg", category: "vintage", title: "1970s Collection" },
-    { id: 18, src: "/assets/gallery/vintage2.jpg", category: "vintage", title: "Classic Parts" },
-    { id: 19, src: "/assets/gallery/vintage3.jpg", category: "vintage", title: "Vintage Showroom" },
-    { id: 20, src: "/assets/gallery/vintage4.jpg", category: "vintage", title: "Restoration Archive" },
+    { id: 34, src: "/assets/gallery/Posing.jpg", category: "vintage", title: "1970s Collection" },
+    { id: 35, src: "/assets/gallery/Soldout.jpg", category: "vintage", title: "Classic Parts" },
+    { id: 36, src: "/assets/gallery/backhelmet.jpg", category: "vintage", title: "Vintage Showroom" },
+    { id: 37, src: "/assets/gallery/helmet.jpg", category: "vintage", title: "Restoration Archive" },
     
     // Additional images
-    { id: 21, src: "/assets/gallery/gallery1.jpg", category: "events", title: "Community Meet" },
-    { id: 22, src: "/assets/gallery/gallery2.jpg", category: "bikes", title: "Custom Build" },
-    { id: 23, src: "/assets/gallery/gallery3.jpg", category: "restoration", title: "Before & After" },
-    { id: 24, src: "/assets/gallery/gallery4.jpg", category: "events", title: "Group Photo" },
-    { id: 25, src: "/assets/gallery/gallery5.jpg", category: "workshop", title: "Detail Work" },
-    { id: 26, src: "/assets/gallery/gallery6.jpg", category: "vintage", title: "Heritage Display" },
+    { id: 38, src: "/assets/gallery/gallery1.jpg", category: "events", title: "Community Meet" },
+    { id: 39, src: "/assets/gallery/gallery2.jpg", category: "bikes", title: "Custom Build" },
+    { id: 40, src: "/assets/gallery/gallery3.jpg", category: "restoration", title: "Before & After" },
+    { id: 41, src: "/assets/gallery/gallery4.jpg", category: "events", title: "Group Photo" },
+    { id: 42, src: "/assets/gallery/gallery5.jpg", category: "workshop", title: "Detail Work" },
+    { id: 43, src: "/assets/gallery/gallery6.jpg", category: "vintage", title: "Heritage Display" },
   ];
 
   const filteredImages = activeCategory === "all" 
@@ -65,10 +86,12 @@ export default function GalleryPage() {
 
   const openLightbox = (src: string) => {
     setSelectedImage(src);
+    setIsLightboxOpen(true);
   };
 
   const closeLightbox = () => {
     setSelectedImage(null);
+    setIsLightboxOpen(false);
   };
 
   return (
@@ -225,26 +248,35 @@ export default function GalleryPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {[
             {
-              title: "RD350LC Restoration",
-              description: "Full restoration journey from start to finish",
-              duration: "15:23",
-              thumbnail: "/assets/videos/restoration.jpg",
+              id: "rd350lc",
+              title: "KARI KEPALA IKAN PANTAI REMIS | WCE CALLING 2025",
+              description: "PRODRUGSRACING | GARANGRACINGMOTOSPORT | RD350 LC",
+              duration: "5:21",
+              thumbnail: "/assets/videos/video1.jpg",
+              youtubeId: "pwJThnlYdw0",
+              youtubeUrl: "https://www.youtube.com/watch?v=pwJThnlYdw0",
             },
             {
-              title: "Workshop Tour",
-              description: "Behind the scenes at our garage",
-              duration: "08:45",
-              thumbnail: "/assets/videos/workshop.jpg",
+              id: "workshop",
+              title: "GARANG RACING RIDE SILATULRAHIM",
+              description: "KERATONG 3.0 | 2025",
+              duration: "21:33",
+              thumbnail: "/assets/videos/video2.jpg",
+              youtubeId: "-v7lKnGZI-Y",
+              youtubeUrl: "https://www.youtube.com/watch?v=-v7lKnGZI-Y",
             },
             {
-              title: "Vintage Gathering 2024",
-              description: "Highlights from our annual event",
-              duration: "12:10",
-              thumbnail: "/assets/videos/gathering.jpg",
+              id: "gathering",
+              title: "RD MEMBER’s MALAYSIA",
+              description: "13th GATHERING | 2025",
+              duration: "14:37",
+              thumbnail: "/assets/videos/video3.jpg",
+              youtubeId: "rQ3ZTXic0rE",
+              youtubeUrl: "https://www.youtube.com/watch?v=rQ3ZTXic0rE",
             },
-          ].map((video, index) => (
+          ].map((video) => (
             <div
-              key={index}
+              key={video.id}
               className="group bg-gradient-to-b from-gray-900 to-black border border-gray-800 rounded-xl overflow-hidden hover:border-red-500/50 transition-all duration-300"
             >
               <div className="relative aspect-video overflow-hidden">
@@ -255,7 +287,8 @@ export default function GalleryPage() {
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                <div className="absolute top-4 right-4 px-2 py-1 bg-black/70 text-white text-sm rounded">
+                <div className="absolute top-4 right-4 px-2 py-1 bg-black/70 text-white text-sm rounded flex items-center gap-2">
+                  <FaYoutube className="text-red-500" />
                   {video.duration}
                 </div>
                 <div className="absolute bottom-4 left-4 right-4">
@@ -263,10 +296,22 @@ export default function GalleryPage() {
                   <p className="text-gray-300 text-sm">{video.description}</p>
                 </div>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-16 h-16 bg-red-500 hover:bg-red-600 rounded-full flex items-center justify-center transition-colors">
+                  <button
+                    onClick={() => setSelectedVideo(video.youtubeId)}
+                    className="w-16 h-16 bg-red-500 hover:bg-red-600 rounded-full flex items-center justify-center transition-colors duration-300 shadow-lg"
+                  >
                     <div className="text-2xl">▶</div>
-                  </div>
+                  </button>
                 </div>
+                <a
+                  href={video.youtubeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute top-4 left-4 p-2 bg-black/70 hover:bg-red-500 rounded-full transition-colors duration-300 opacity-0 group-hover:opacity-100"
+                  title="Open on YouTube"
+                >
+                  <FaExternalLinkAlt className="text-white" />
+                </a>
               </div>
             </div>
           ))}
@@ -274,7 +319,7 @@ export default function GalleryPage() {
       </section>
 
       {/* ======= SHARE YOUR PHOTOS ======= */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      {/*<section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="bg-gradient-to-r from-gray-900 to-black border border-gray-800 rounded-2xl p-8 md:p-12 text-center">
           <h2 className="font-oswald text-3xl md:text-4xl font-bold mb-4">
             SHARE <span className="text-red-500">YOUR</span> PHOTOS
@@ -293,42 +338,79 @@ export default function GalleryPage() {
             </button>
           </div>
         </div>
-      </section>
+      </section>*/}
 
-      {/* ======= LIGHTBOX MODAL ======= */}
-      {selectedImage && (
+      {/* ======= YOUTUBE VIDEO MODAL ======= */}
+      {selectedVideo && (
         <div
           className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+          onClick={() => setSelectedVideo(null)}
+        >
+          <div className="relative w-full max-w-4xl">
+            <button
+              onClick={() => setSelectedVideo(null)}
+              className="absolute top-4 right-4 p-3 bg-black/70 hover:bg-black/90 rounded-full transition-colors z-10"
+            >
+              ✕
+            </button>
+            <div className="relative aspect-video bg-black rounded-lg overflow-hidden">
+              <iframe
+                width="100%"
+                height="100%"
+                src={`https://www.youtube.com/embed/${selectedVideo}?autoplay=1`}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="absolute inset-0 w-full h-full"
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ======= LIGHTBOX MODAL ======= */}
+      {isLightboxOpen && selectedImage && (
+        <div
+          className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4"
           onClick={closeLightbox}
         >
-          <div className="relative max-w-6xl max-h-[90vh]">
-            <Image
-              src={selectedImage}
-              alt="Enlarged view"
-              width={1200}
-              height={800}
-              className="object-contain max-h-[90vh] rounded-lg"
-            />
-            <div className="absolute top-4 right-4 flex gap-2">
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  // Download functionality
-                  const link = document.createElement('a');
-                  link.href = selectedImage;
-                  link.download = 'asri-garage-photo.jpg';
-                  link.click();
-                }}
-                className="p-3 bg-black/70 hover:bg-black/90 rounded-full transition-colors"
-              >
-                <FaDownload className="text-white" />
-              </button>
-              <button
-                onClick={closeLightbox}
-                className="p-3 bg-black/70 hover:bg-black/90 rounded-full transition-colors"
-              >
-                ✕
-              </button>
+          <div className="relative w-full max-w-6xl max-h-[90vh] flex items-center justify-center">
+            <div
+              className="relative w-full h-full"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh] flex items-center justify-center">
+                <Image
+                  src={selectedImage}
+                  alt="Enlarged view"
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 768px) 100vw, 90vw"
+                />
+              </div>
+              <div className="absolute top-4 right-4 flex gap-2 z-10">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    // Download functionality
+                    const link = document.createElement('a');
+                    link.href = selectedImage;
+                    link.download = 'asri-garage-photo.jpg';
+                    link.click();
+                  }}
+                  className="p-3 bg-black/70 hover:bg-red-600 rounded-full transition-colors"
+                  title="Download image"
+                >
+                  <FaDownload className="text-white" />
+                </button>
+                <button
+                  onClick={closeLightbox}
+                  className="p-3 bg-black/70 hover:bg-red-600 rounded-full transition-colors"
+                  title="Close lightbox"
+                >
+                  ✕
+                </button>
+              </div>
             </div>
           </div>
         </div>

@@ -23,7 +23,7 @@ const Footer = () => {
             {/* Brand Column */}
             <div className="space-y-4">
               <div className="flex items-center space-x-2">
-                <FaMotorcycle className="text-red-500 text-3xl" />
+                <img src="/assets/images/Asriluckystrikegaragelogo.png" alt="Asri Luckystrike Logo" className="w-8 h-8" />
                 <div>
                   <h2 className="font-oswald text-2xl font-bold text-white">
                     ASRI LUCKYSTRIKE
@@ -35,16 +35,16 @@ const Footer = () => {
                 Preserving motorcycle heritage since 1990. Specialists in rare & vintage Yamaha machines.
               </p>
               <div className="flex space-x-4 pt-2">
-                <a href="#" className="text-gray-400 hover:text-red-500 transition-colors duration-300">
+                <a href="https://www.facebook.com/Asriluckystrikegarage/" className="text-gray-400 hover:text-red-500 transition-colors duration-300">
                   <FaFacebook size={20} />
                 </a>
-                <a href="#" className="text-gray-400 hover:text-red-500 transition-colors duration-300">
+                <a href="https://www.instagram.com/asriluckystrikegarage/" className="text-gray-400 hover:text-red-500 transition-colors duration-300">
                   <FaInstagram size={20} />
                 </a>
-                <a href="#" className="text-gray-400 hover:text-red-500 transition-colors duration-300">
+                <a href="https://www.youtube.com/c/AsriLuckystrikeGarage" className="text-gray-400 hover:text-red-500 transition-colors duration-300">
                   <FaYoutube size={20} />
                 </a>
-                <a href="#" className="text-gray-400 hover:text-red-500 transition-colors duration-300">
+                <a href="https://wa.me/60126736445?text=Hi%20Asri%20LuckyStrike%20Garage" className="text-gray-400 hover:text-red-500 transition-colors duration-300">
                   <SiWhatsapp size={20} />
                 </a>
               </div>
@@ -56,10 +56,10 @@ const Footer = () => {
                 QUICK LINKS
               </h3>
               <ul className="space-y-2">
-                {["Home", "About", "Models", "Merchandise", "Events", "Gallery", "Contact"].map((link) => (
+                {["About", "Models", "Merchandise", "Events", "Gallery", "Contact"].map((link) => (
                   <li key={link}>
                     <a
-                      href={`#${link.toLowerCase()}`}
+                      href={`${link.toLowerCase()}`}
                       className="text-sm text-gray-400 hover:text-red-500 hover:pl-2 transition-all duration-300 flex items-center"
                     >
                       <span className="w-1 h-1 bg-red-500 rounded-full mr-2 opacity-0 group-hover:opacity-100"></span>
@@ -84,7 +84,7 @@ const Footer = () => {
                 </div>
                 <div className="flex items-center space-x-3">
                   <FaPhone className="text-red-500 flex-shrink-0" />
-                  <span className="text-sm">+60 12-345 6789</span>
+                  <span className="text-sm">+60 12-673 6445</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <FaEnvelope className="text-red-500 flex-shrink-0" />

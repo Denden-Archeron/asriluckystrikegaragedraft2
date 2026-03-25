@@ -36,9 +36,9 @@ export default function ContactPage() {
   ];
 
   const socialMedia = [
-    { icon: <FaFacebook />, name: "Facebook", link: "#" },
-    { icon: <FaInstagram />, name: "Instagram", link: "#" },
-    { icon: <FaYoutube />, name: "YouTube", link: "#" },
+    { icon: <FaFacebook />, name: "Facebook", link: "https://www.facebook.com/Asriluckystrikegarage/" },
+    { icon: <FaInstagram />, name: "Instagram", link: "https://www.instagram.com/asriluckystrikegarage/" },
+    { icon: <FaYoutube />, name: "YouTube", link: "https://www.youtube.com/c/AsriLuckystrikeGarage" },
   ];
 
   return (
@@ -186,9 +186,14 @@ export default function ContactPage() {
                     <div className="text-6xl mb-4">📍</div>
                     <h3 className="font-oswald text-xl font-semibold mb-2">Our Location</h3>
                     <p className="text-gray-400">Selangor, Malaysia</p>
-                    <button className="mt-4 px-6 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors">
+                    <a 
+                      href="https://www.google.com/maps/search/ASRI+LUCKYSTRIKE+GARAGE,LOT+6015-A3+JALAN+IPOH+BATU+7+1,+4,+Jalan+Selayang+Baru,+68100+Batu+Caves,+Selangor"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-4 inline-block px-6 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors"
+                    >
                       Get Directions
-                    </button>
+                    </a>
                   </div>
                 </div>
               </div>
